@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Online</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h2>Chat Room</h2>
+        </div>
+        <div class="chat-login">
+            <input type="text" placeholder="Enter your nickname">
+            <button id="login-button">Join Chat</button>
+            <div class="error-message"></div>
+        </div>
+        <div class="chat-messages" style="display: none;"></div>
+        <div class="chat-input" style="display: none;">
+            <input type="text" id="message-input" placeholder="Type your message here...">
+            <button id="send-button">Send</button>
+        </div>
+        <p id="user-count" style="color: green; display: none;"></p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
