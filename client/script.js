@@ -17,17 +17,14 @@ loginButton.addEventListener('click', function () {
         const request = new XMLHttpRequest();
         
         const evtSource = new EventSource('http://127.0.0.1:3000/events');
-        evtSource.addEventListener('message', function ({ data }) {
-            const stringConnectedUsers = document.createTextNode(data);
-            userCount.innerHTML = '';
-            userCount.append(stringConnectedUsers);
-        });
+        evtSource.addEventListener('message', ({ data }) => enterNumberOfUsers(data) );
+        evtSource.addEventListener('userLoggedOut', ({ data }) => enterNumberOfUsers(data));
 
-        evtSource.addEventListener('userLoggedOut', function({ data }) {
+        function enterNumberOfUsers(data) {
             const stringConnectedUsers = document.createTextNode(data);
             userCount.innerHTML = '';
             userCount.append(stringConnectedUsers);
-        });
+        }
 
         request.open('POST', 'http://127.0.0.1:3000/nickname');
         request.setRequestHeader('Content-Type', 'application/json');
@@ -47,9 +44,7 @@ loginButton.addEventListener('click', function () {
             const chatInput = document.querySelector('.chat-input');
 
             if (errorMessage.textContent) errorMessage.textContent = '';
-            chatMessages.style.display = 'block';
-            chatInput.style.display = 'block';
-            userCount.style.display = 'block';
+            [ chatMessages, chatInput, userCount ].forEach(element => element.style.display = 'block')
             chatLogin.style.display = 'none';
         }
     }())
